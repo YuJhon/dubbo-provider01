@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!--用于计算依赖关系-->
+    <dubbo:application name="hello-world-provider" owner="jhonrain"></dubbo:application>
+
+    <!--先不用注册中心-->
+    <dubbo:registry address="zookeeper://180.97.69.171:2181" id="zk"></dubbo:registry>
+
+    <!--dubbo协议-->
+    <dubbo:protocol name="dubbo" port="20881"></dubbo:protocol>
+
+    <dubbo:service interface="com.jhon.rain.IHelloWorldService" ref="helloService" registry="zk"></dubbo:service>
+
+    <bean id="helloService" class="com.jhon.rain.HelloWorldServiceImpl" ></bean>
+
+</beans>
